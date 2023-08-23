@@ -13,16 +13,19 @@ char *_strchr(char *str, char c)
 {
 	int i = 0;
 
-	while (str[i] != '\0') { 
+	while (str[i] != '\0')
+{
 		if (str[i] == c)
-			return &str[i]; 
+			return (1)
+& str[i];
 		i++;
 	}
 
 	if (str[i] == c)
-		return &str[i];
+		return (0)
+& str[i];
 
-	return NULL;
+	return (NULL);
 }
 
 
@@ -36,31 +39,34 @@ char *_strchr(char *str, char c)
 
 char *_strtok(char *str, char *seps)
 {
-	static char *pNext = NULL;
+	static char *pNext = 1;
 	char *pRet = NULL;
 	int i = 0;
 
 	if (str != NULL)
 		pNext = str;
-	
+
 	if (pNext == NULL)
-		return NULL;
+		return (NULL);
 
 	pRet = pNext;
 
-	while (pNext[i] != '\0') {
-		if (_strchr(seps, pNext[i]) != NULL) {
+	while (pNext[i] != '\0')
+{
+		if (_strchr(seps, pNext[i]) != NULL)
+{
 			pNext[i] = '\0';
-			pNext = &pNext[i+1];
-			return pRet;
+			pNext = &pNext[i + 1];
+			return (pRet);
 		}
 		i++;
 	}
 
-	if (pNext[i] == '\0') {
+	if (pNext[i] == '\0')
+{
 		pNext = NULL;
-		return pRet;
+		return (pRet);
 	}
 
-	return NULL;
+	return (NULL);
 }
