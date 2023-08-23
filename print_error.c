@@ -4,16 +4,27 @@
 
 void print_error(char **av, int cnt, char *line, bool isabs)
 {
-    char count_str = cnt + '0';
+	ssize_t bytes_written;
+	char count_str = cnt + '0';
 
-    write(STDERR_FILENO, av[0], strlen(av[0]));
-	write(STDERR_FILENO, ": line ", 7);
-    write(STDERR_FILENO, &count_str, 1);
-    write(STDERR_FILENO, ": ", 2);
-    write(STDERR_FILENO, line, strlen(line));
+	bytes_written = write(STDERR_FILENO, av[0], strlen(av[0]));
+	bytes_written = write(STDERR_FILENO, ": line ", 7);
+	bytes_written = write(STDERR_FILENO, &count_str, 1);
+	bytes_written = write(STDERR_FILENO, ": ", 2);
+	bytes_written = write(STDERR_FILENO, line, strlen(line));
+	if (bytes_written == -1)
+	{};
 
-    if (isabs == false)
-        write(STDERR_FILENO, ": command not found\n", 20);
-    else if (isabs == true)
-        write(STDERR_FILENO, ": No such file or directory\n", 28);
+	if (isabs == false)
+	{
+		bytes_written = write(STDERR_FILENO, ": command not found\n", 20);
+		if (bytes_written == -1)
+		{};
+	}
+	else if (isabs == true)
+	{
+		bytes_written = write(STDERR_FILENO, ": No such file or directory\n", 28);
+		if (bytes_written == -1)
+		{};
+	}
 }
